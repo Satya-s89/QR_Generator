@@ -9,8 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
-CORS(app, origins=[frontend_url])
+CORS(app, origins=['*'], methods=['GET', 'POST'], allow_headers=['Content-Type'])
 
 @app.route('/generate-qr', methods=['POST'])
 def generate_qr():
@@ -28,7 +27,9 @@ def generate_qr():
     img.save(buffer, format='PNG')
     img_str = base64.b64encode(buffer.getvalue()).decode()
     
-    return jsonify({'qr_code': f'data:image/png;base64,{img_str}'})
+    response = jsonify({'qr_code': f'data:image/png;base64,{img_str}'})
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
