@@ -3,9 +3,14 @@ from flask_cors import CORS
 import qrcode
 import io
 import base64
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+frontend_url = os.getenv('FRONTEND_URL', 'http://localhost:3000')
+CORS(app, origins=[frontend_url])
 
 @app.route('/generate-qr', methods=['POST'])
 def generate_qr():
@@ -26,6 +31,5 @@ def generate_qr():
     return jsonify({'qr_code': f'data:image/png;base64,{img_str}'})
 
 if __name__ == '__main__':
-    import os
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)

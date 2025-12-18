@@ -2,7 +2,7 @@
 
 A simple QR code generator with Python Flask backend and React frontend.
 
-## Setup
+## Local Development
 
 ### Backend
 ```bash
@@ -17,6 +17,13 @@ cd frontend
 npm install
 npm start
 ```
+
+## Deployment
+
+- **Backend**: Deploy to Render (pure Python, no Docker)
+- **Frontend**: Deploy to Netlify
+- Uses Gunicorn for production server
+- Python 3.9 runtime specified
 
 ## Usage
 
