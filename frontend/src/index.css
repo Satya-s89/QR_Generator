@@ -1,13 +1,102 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  /* Common variables */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-fast: 0.15s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  --transition-normal: 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  
+  /* Neo-Brutalist 121 Theme Colors */
+  --bg-canvas: #FAF8F4;
+  --panel-bg: #FFFFFF;
+  --text-primary: #0D2421;
+  --text-secondary: #4A6360;
+  --border-color: #0D2421;
+  --input-bg: #FFFFFF;
+  --accent-color: #FF6B35;
+  --accent-color-hover: #FF5216;
+  --accent-light: rgba(255, 107, 53, 0.15);
+  --accent-dark: #0D2421;
+  
+  /* Solid Drop Shadows */
+  --shadow-sm: 2px 2px 0px 0px #0D2421;
+  --shadow-md: 4px 4px 0px 0px #0D2421;
+  --shadow-lg: 8px 8px 0px 0px #0D2421;
+  --border-width: 2px;
+}
+
+[data-theme='dark'] {
+  /* Dark Neo-Brutalist Theme */
+  --bg-canvas: #0A0F0E;
+  --panel-bg: #121A18;
+  --text-primary: #FAF8F4;
+  --text-secondary: #7A9692;
+  --border-color: #FAF8F4;
+  --input-bg: #182321;
+  --accent-color: #FF6B35;
+  --accent-color-hover: #FF8255;
+  --accent-light: rgba(255, 107, 53, 0.2);
+  --accent-dark: #FAF8F4;
+  
+  --shadow-sm: 2px 2px 0px 0px #FAF8F4;
+  --shadow-md: 4px 4px 0px 0px #FAF8F4;
+  --shadow-lg: 8px 8px 0px 0px #FAF8F4;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background var(--transition-normal), color var(--transition-normal);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Blueprint Dot Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: radial-gradient(var(--text-primary) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+[data-theme='dark'] body::before {
+  opacity: 0.06;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border: var(--border-width) solid var(--bg-canvas);
+  border-radius: 4px;
 }
